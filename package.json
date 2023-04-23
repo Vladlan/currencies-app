@@ -1,0 +1,34 @@
+{
+  "name": "currencies-project",
+  "version": "1.0.0",
+  "description": "Vladislav Lanskikh's currencies project",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vladlan/NodeJSLearning.git"
+  },
+  "keywords": [
+    "NodeJS",
+    "JavaScript"
+  ],
+  "author": "Vladlan",
+  "license": "ISC",
+  "scripts": {
+    "lint": "eslint --fix ./**/*.ts",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.ts": "npm run lint"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@typescript-eslint/parser": "^5.52.0",
+    "eslint": "^8.34.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.2",
+    "prettier": "2.8.3",
+    "tslint": "6.1.3",
+    "tslint-config-prettier": "1.18.0"
+  }
+}

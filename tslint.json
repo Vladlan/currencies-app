@@ -1,0 +1,12 @@
+{
+  "extends": ["tslint:latest", "tslint-config-prettier"],
+  "rules": {
+    "no-implicit-dependencies": [true, "dev"],
+    "no-console": [true, "dev"],
+    "object-literal-sort-keys": [false, "dev"],
+    "quotemark": [true, "double"],
+    "indent": [true, "tabs", 2],
+    "linebreak-style": [true, "LF"],
+    "semicolon": [true, "never", "ignore-interfaces"]
+  }
+}
