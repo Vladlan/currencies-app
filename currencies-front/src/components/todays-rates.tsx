@@ -1,21 +1,38 @@
 import React, { useEffect, useState } from 'react'
 import { getLatestRates } from '../services/currencies.service'
 
+const allowedCurrencies = ['USD', 'EUR', 'GBP', 'CAD', 'MXN', 'JPY']
+
+type TodaysRatesType = Array<{ key: string; value: number }>
+
+const roundNum = (num: number, limit = 1_0000) =>
+  Math.round((num + Number.EPSILON) * limit) / limit
+
 const TodaysRates = () => {
-  const [content, setContent] = useState<string>('')
+  const [todaysRates, setTodaysRates] = useState<TodaysRatesType>([])
 
   useEffect(() => {
     getLatestRates().then(
-      (response) => {
-        setContent(response)
+      (latestRatesRaw: { [key: string]: number }) => {
+        if (latestRatesRaw) {
+          const latestRates = Object.entries(latestRatesRaw).reduce(
+            (acc: TodaysRatesType, [key, value]) => {
+              if (allowedCurrencies.includes(key)) {
+                acc.push({ key, value: roundNum(value) })
+              }
+              return acc
+            },
+            [],
+          )
+          setTodaysRates(latestRates)
+        }
       },
       (error) => {
-        const _content =
+        const errDescription =
           (error.response && error.response.data) ||
           error.message ||
           error.toString()
-
-        setContent(_content)
+        console.error(errDescription)
       },
     )
   }, [])
@@ -28,10 +45,9 @@ const TodaysRates = () => {
         </span>
       </div>
       <ul className="dark:text-white text-gray-800 p-4 bg-gray-100 dark:bg-gray-700">
-        {content &&
-          Object.keys(content).map((key) => (
-            <li key={key}>{`${key}: ${content[key]}`}</li>
-          ))}
+        {todaysRates?.map(({ key, value }) => (
+          <li key={key}>{`${key}: ${value}`}</li>
+        ))}
       </ul>
     </div>
   )
