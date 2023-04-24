@@ -1,7 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { getLatestRates } from '../services/currencies.service'
+import USD_flag from '../assets/flags/USD_flag.svg'
+import EUR_flag from '../assets/flags/EUR_flag.svg'
+import GBP_flag from '../assets/flags/GBP_flag.svg'
+import CAD_flag from '../assets/flags/CAD_flag.svg'
+import MXN_flag from '../assets/flags/MXN_flag.svg'
+import JPY_flag from '../assets/flags/JPY_flag.png'
 
 const allowedCurrencies = ['USD', 'EUR', 'GBP', 'CAD', 'MXN', 'JPY']
+const flagsMap = {
+  USD: USD_flag,
+  EUR: EUR_flag,
+  GBP: GBP_flag,
+  CAD: CAD_flag,
+  MXN: MXN_flag,
+  JPY: JPY_flag,
+}
 
 type TodaysRatesType = Array<{ key: string; value: number }>
 
@@ -44,11 +58,25 @@ const TodaysRates = () => {
           {`Today's rates`}
         </span>
       </div>
-      <ul className="dark:text-white text-gray-800 p-4 bg-gray-100 dark:bg-gray-700">
-        {todaysRates?.map(({ key, value }) => (
-          <li key={key}>{`${key}: ${value}`}</li>
-        ))}
-      </ul>
+
+      <table className="bg-gray-100 dark:bg-gray-700">
+        <tbody>
+          {todaysRates?.map(({ key, value }) => (
+            <tr key={key} className="dark:text-white text-gray-800 text-sm">
+              <td className="px-4 py-2">
+                <img
+                  src={flagsMap[key as keyof typeof flagsMap]}
+                  alt={`Flag of ${key}`}
+                  width="24"
+                  height="24"
+                />
+              </td>
+              <td>{key}</td>
+              <td>{value}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   )
 }
