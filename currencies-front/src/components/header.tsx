@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import logo from "./../logo.svg";
+import React, { useState } from 'react'
+import logo from './../logo.svg'
 
 const Header = () => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0)
 
   return (
     <header className="flex flex-col items-center justify-center flex-grow text-2xl text-gray-700 dark:text-white">
@@ -28,7 +28,7 @@ const Header = () => {
         >
           Learn React
         </a>
-        {" | "}
+        {' | '}
         <a
           className="text-blue-400"
           href="https://vitejs.dev/guide/features.html"
@@ -39,7 +39,7 @@ const Header = () => {
         </a>
       </p>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

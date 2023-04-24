@@ -9,6 +9,8 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  rules: {},
+  rules: {
+    '@typescript-eslint/no-var-requires': 'off',
+  },
   ignorePatterns: ['node_modules'],
 }
