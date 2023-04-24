@@ -6,8 +6,15 @@ import LoginPage from './pages/login.page'
 import NotFoundPage from './pages/not-fount.page'
 import CurrenciesPage from './pages/currencies.page'
 import { ProtectedRoute } from './components/protected-route'
-import { CURRENCIES_ROUTE, LOGIN_ROUTE } from './constants'
+import {
+  CURRENCIES_ROUTE,
+  CURRENCY_CONVERTER_ROUTE,
+  HISTORICAL_RATES_ROUTE,
+  LOGIN_ROUTE,
+} from './constants'
 import { AnonymousRoute } from './components/anonymous-route'
+import CurrencyConverter from './components/currency-converter'
+import HistoricalRates from './components/historical-rates'
 
 function App() {
   return (
@@ -38,7 +45,16 @@ function App() {
                 <CurrenciesPage />
               </ProtectedRoute>
             }
-          />
+          >
+            <Route
+              path={CURRENCY_CONVERTER_ROUTE}
+              element={<CurrencyConverter />}
+            />
+            <Route
+              path={HISTORICAL_RATES_ROUTE}
+              element={<HistoricalRates />}
+            />
+          </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
