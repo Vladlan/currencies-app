@@ -16,9 +16,16 @@ export const logout = () => {
   localStorage.removeItem('user')
 }
 
-export const getCurrentUser = () => {
+export const getCurrentUserToken = () => {
   const token = localStorage.getItem('user')
   if (token) return token
 
   return null
+}
+
+export const getAuthHeader = () => {
+  const token = getCurrentUserToken()
+  if (token) return { Authorization: token }
+
+  return {}
 }

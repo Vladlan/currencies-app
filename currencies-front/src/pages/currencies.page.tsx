@@ -6,7 +6,7 @@ import TabGroup from '../components/tab-group'
 const CurrenciesPage = () => {
   return (
     <div className="bg-white dark:bg-gray-800 h-[calc(100vh-4rem)] flex flex-row justify-center content-center sm:px-6 lg:px-8">
-      <div className="flex flex-nowrap my-10">
+      <div className="flex flex-nowrap my-10 w-full">
         <div className="w-3/4">
           <TabGroup />
           <Outlet />

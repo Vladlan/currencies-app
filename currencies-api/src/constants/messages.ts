@@ -26,6 +26,10 @@ export const USER_MSGS = {
   notAllDataProvided: 'Not all data has been provided',
 }
 
+export const CURRENCIES_MSGS = {
+  failedToRetrieveLatestsRates: 'Failed to retrieve latests rates',
+}
+
 export const AUTH_MSGS = {
   loginOrPasswordAreWrong: 'Login or password are wrong',
   authTokenIsNotValid: 'Auth token is not valid',

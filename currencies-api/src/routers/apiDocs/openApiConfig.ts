@@ -1,5 +1,11 @@
-import { AUTH_ROUTES, SERVER_PORT, USER_ROUTES } from '../../constants'
+import {
+  AUTH_ROUTES,
+  CURRENCIES_ROUTES,
+  SERVER_PORT,
+  USER_ROUTES,
+} from '../../constants'
 import { loginDoc } from '../auth/docs'
+import { getLatestRatesDoc } from '../currencies/docs'
 
 import { getUserDoc, getUsersDoc } from '../user/docs'
 
@@ -22,6 +28,9 @@ export const openApiConfig = {
   paths: {
     [AUTH_ROUTES.login]: {
       post: loginDoc,
+    },
+    [CURRENCIES_ROUTES.latestRates]: {
+      get: getLatestRatesDoc,
     },
 
     [USER_ROUTES.users]: {

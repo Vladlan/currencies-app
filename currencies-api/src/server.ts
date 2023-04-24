@@ -16,16 +16,21 @@ import {
 } from './utils'
 import * as dotenv from 'dotenv'
 import * as path from 'path'
+import swaggerUi from 'swagger-ui-express'
+
+import { ROUTE_API_DOCS, ROUTE_API_DOCS_SWAGGER } from './constants/routes'
+import { openApiConfig } from './routers/apiDocs/openApiConfig'
 
 if (!process.env.NODE_ENV) throw new Error('NODE_ENV is not defined')
 
 const env = dotenv.config({
   path: path.resolve(__dirname, `./../.env.${process.env.NODE_ENV}`),
 }).parsed
-import swaggerUi from 'swagger-ui-express'
 
-import { ROUTE_API_DOCS, ROUTE_API_DOCS_SWAGGER } from './constants/routes'
-import { openApiConfig } from './routers/apiDocs/openApiConfig'
+if (process.env.NODE_ENV !== 'test' && !process.env.CURRENCY_API_KEY) {
+  throw new Error('CURRENCY_API_KEY is not defined')
+}
+
 ;(async () => {
   await SequelizeInstance.sync({ force: false })
 
