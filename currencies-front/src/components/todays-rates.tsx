@@ -7,7 +7,6 @@ import CAD_flag from '../assets/flags/CAD_flag.svg'
 import MXN_flag from '../assets/flags/MXN_flag.svg'
 import JPY_flag from '../assets/flags/JPY_flag.png'
 
-const allowedCurrencies = ['USD', 'EUR', 'GBP', 'CAD', 'MXN', 'JPY']
 const flagsMap = {
   USD: USD_flag,
   EUR: EUR_flag,
@@ -31,9 +30,7 @@ const TodaysRates = () => {
         if (latestRatesRaw) {
           const latestRates = Object.entries(latestRatesRaw).reduce(
             (acc: TodaysRatesType, [key, value]) => {
-              if (allowedCurrencies.includes(key)) {
-                acc.push({ key, value: roundNum(value) })
-              }
+              acc.push({ key, value: roundNum(value) })
               return acc
             },
             [],

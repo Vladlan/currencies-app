@@ -4,10 +4,10 @@ import { getAuthHeader } from './auth.service'
 
 export const getLatestRates = async () => {
   const response = await axios.get(
-    `${API_URL}/${CURRENCIES_ROUTE}/${LATEST_RATES_ROUTE}`,
+    `${API_URL}/${CURRENCIES_ROUTE}/${LATEST_RATES_ROUTE}?currencies=USD,EUR,GBP,CAD,MXN,JPY`,
     {
       headers: getAuthHeader(),
     },
   )
-  return response.data
+  return response.data.data
 }
