@@ -15,7 +15,7 @@ const Nav = () => {
       </h1>
       <div className="flex items-center">
         <button
-          className="flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 p-2 text-black rounded hover:text-yellow-400 dark:text-white hover:bg-gray-500 dark:hover:bg-gray-500 dark:hover:text-yellow-400"
+          className="mr-4 flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 p-2 text-black rounded hover:text-yellow-400 dark:text-white hover:bg-gray-500 dark:hover:bg-gray-500 dark:hover:text-yellow-400"
           onClick={toggleDarkMode}
         >
           <MoonIcon />
