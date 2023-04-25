@@ -7,16 +7,40 @@ import {
 } from '../../api-docs/shared'
 import {
   apiKeyQueryParam,
-  currenciesQueryParam,
   baseCurrencyQueryParam,
+  currenciesQueryParam,
 } from '../../api-docs/shared/query-params'
 
-export const getLatestRatesDoc = {
+export const getHistoricalRatesDoc = {
   tags: [CURRENCIES_TAG],
-  description: 'Retrieve currencies latest rates',
-  operationId: 'getCurrenciesLatestRates',
+  description: 'Retrieve historical rates',
+  operationId: 'getCurrenciesHistoricalRates',
   security: bearerSecurityDoc,
-  parameters: [apiKeyQueryParam, currenciesQueryParam, baseCurrencyQueryParam],
+  parameters: [
+    apiKeyQueryParam,
+    {
+      name: 'date_from',
+      in: 'query',
+      description:
+        'Start date to retrieve historical rates from (format: 2021-12-31)',
+      required: true,
+      schema: {
+        type: 'string',
+      },
+    },
+    {
+      name: 'date_to',
+      in: 'query',
+      description:
+        'End date to retrieve historical rates from (format: 2021-12-31)',
+      required: true,
+      schema: {
+        type: 'string',
+      },
+    },
+    currenciesQueryParam,
+    baseCurrencyQueryParam,
+  ],
   responses: {
     '200': {
       description: 'OK',

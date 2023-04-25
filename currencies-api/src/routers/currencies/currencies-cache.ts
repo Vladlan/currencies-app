@@ -14,7 +14,7 @@ export const getProxyMiddlewareOptions = (
   pathRewrite: {
     [pathRewrite]: '',
   },
-  logger: winstonLogger,
+  logger: winstonLogger.info,
   selfHandleResponse: true,
   onProxyReq: (proxyReq) => {
     proxyReq.setHeader('apikey', process.env.CURRENCY_API_KEY)

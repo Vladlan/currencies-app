@@ -5,6 +5,11 @@ import {
   internalServerErrorDoc,
   bearerSecurityDoc,
 } from '../../api-docs/shared'
+import {
+  apiKeyQueryParam,
+  currenciesQueryParam,
+  baseCurrencyQueryParam,
+} from '../../api-docs/shared/query-params'
 
 const USD = {
   symbol: '€',
@@ -21,6 +26,7 @@ export const getCurrenciesDoc = {
   description: 'Retrieve available currencies',
   operationId: 'getCurrencies',
   security: bearerSecurityDoc,
+  parameters: [apiKeyQueryParam, currenciesQueryParam],
   responses: {
     '200': {
       description: 'OK',
