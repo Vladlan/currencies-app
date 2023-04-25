@@ -7,10 +7,13 @@ import {
 } from '../constants'
 import { getAuthHeader } from './auth.service'
 import { getDateRangeFromTodayToYearAgo } from '../utils/get-date-range-from-today-to-year-ago'
+import { CurrenciesInfoType } from '../types'
 
-export const getLatestRates = async () => {
+export const getLatestRates = async (
+  baseCurrency: string,
+): Promise<{ [key: string]: number }> => {
   const response = await axios.get(
-    `${API_URL}/${CURRENCIES_ROUTE}/${LATEST_RATES_ROUTE}?currencies=USD,EUR,GBP,CAD,MXN,JPY`,
+    `${API_URL}/${CURRENCIES_ROUTE}/${LATEST_RATES_ROUTE}?base_currency=${baseCurrency}&currencies=USD,EUR,GBP,CAD,MXN,JPY`,
     {
       headers: getAuthHeader(),
     },
@@ -42,7 +45,7 @@ export const getCurrencyRatesLYHistory = async (
   return response.data.data
 }
 
-export const getCurrenciesInfo = async () => {
+export const getCurrenciesInfo = async (): Promise<CurrenciesInfoType> => {
   const response = await axios.get(
     `${API_URL}/${CURRENCIES_ROUTE}?currencies=USD,EUR,GBP,CAD,MXN,JPY`,
     {

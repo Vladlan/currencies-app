@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import { CurrencyInfoType, TodaysRatesType } from '../../types'
 import { USD_CURRENCY_INFO } from '../../constants'
 
@@ -7,8 +7,14 @@ type CurrenciesContext = {
   todaysRates: TodaysRatesType
   cOptionFrom: CurrencyInfoType
   cOptionTo: CurrencyInfoType
-  handleCOptionToChange: (e: CurrencyInfoType) => void
-  handleCOptionFromChange: (e: CurrencyInfoType) => void
+  handleNumInpChange1: (e: ChangeEvent<HTMLInputElement>) => void
+  handleFromSelectChange: (e: CurrencyInfoType) => void
+  valueFrom: number
+  handleToSelectChange: (e: CurrencyInfoType) => void
+  handleNumInpChange2: (e: ChangeEvent<HTMLInputElement>) => void
+  valueTo: number
+  rateLastUpdateDate: string
+  rate: number
 }
 
 export const CurrenciesContext = React.createContext<CurrenciesContext>({
@@ -16,10 +22,20 @@ export const CurrenciesContext = React.createContext<CurrenciesContext>({
   cOptionFrom: USD_CURRENCY_INFO,
   cOptionTo: USD_CURRENCY_INFO,
   todaysRates: [],
-  handleCOptionToChange: () => {
-    // do nothing
+  handleNumInpChange1: (e: ChangeEvent<HTMLInputElement>) => {
+    // empty
   },
-  handleCOptionFromChange: () => {
-    // do nothing
+  handleFromSelectChange: (e: CurrencyInfoType) => {
+    // empty
   },
+  valueFrom: 1_000,
+  handleToSelectChange: (e: CurrencyInfoType) => {
+    // empty
+  },
+  handleNumInpChange2: (e: ChangeEvent<HTMLInputElement>) => {
+    // empty
+  },
+  valueTo: 1_000,
+  rateLastUpdateDate: '',
+  rate: 1,
 })
