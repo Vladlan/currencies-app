@@ -19,7 +19,7 @@ import * as path from 'path'
 import swaggerUi from 'swagger-ui-express'
 
 import { ROUTE_API_DOCS, ROUTE_API_DOCS_SWAGGER } from './constants/routes'
-import { openApiConfig } from './routers/apiDocs/openApiConfig'
+import { openApiConfig } from './routers/api-docs/open-api-config'
 
 if (!process.env.NODE_ENV) throw new Error('NODE_ENV is not defined')
 

@@ -1,2 +1,2 @@
 export * from './login.doc'
-export * from './loginBody.doc'
+export * from './login-body.doc'

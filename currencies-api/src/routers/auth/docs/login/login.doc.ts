@@ -1,7 +1,7 @@
 import { AUTH_TAG } from '../../../../constants'
-import { internalServerErrorDoc } from '../../../apiDocs/shared'
-import { loginBadReqDoc } from './loginBadReq.doc'
-import { loginBodyDoc } from './loginBody.doc'
+import { internalServerErrorDoc } from '../../../api-docs/shared'
+import { loginBadReqDoc } from './login-bad-req.doc'
+import { loginBodyDoc } from './login-body.doc'
 
 export const loginDoc = {
   tags: [AUTH_TAG],

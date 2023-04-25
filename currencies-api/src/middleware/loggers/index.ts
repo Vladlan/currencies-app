@@ -1,2 +1,2 @@
-export { default as errorLoggerMiddleware } from './errorLogger'
-export { default as reqLoggerMiddleware } from './reqLogger'
+export { default as errorLoggerMiddleware } from './error-logger'
+export { default as reqLoggerMiddleware } from './req-logger'

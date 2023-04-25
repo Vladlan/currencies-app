@@ -1,3 +1,3 @@
 export * from './docs'
-export * from './getUser'
-export * from './getUsers'
+export * from './get-user'
+export * from './get-users'

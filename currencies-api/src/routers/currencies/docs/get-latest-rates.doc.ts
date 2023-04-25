@@ -4,7 +4,7 @@ import {
   forbiddenDoc,
   internalServerErrorDoc,
   bearerSecurityDoc,
-} from '../../apiDocs/shared'
+} from '../../api-docs/shared'
 
 export const getLatestRatesDoc = {
   tags: [CURRENCIES_TAG],

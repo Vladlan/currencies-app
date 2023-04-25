@@ -1,1 +1,1 @@
-export * from './getLatestRates.doc'
+export * from './get-latest-rates.doc'

@@ -1,4 +1,4 @@
-import { userProp } from '../../../apiDocs/shared'
+import { userProp } from '../../../api-docs/shared'
 
 export const userResponseWithRoleDoc = {
   ...userProp.user,

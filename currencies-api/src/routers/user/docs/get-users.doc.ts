@@ -1,35 +1,32 @@
 import { USERS_TAG } from '../../../constants'
 import {
-  bearerSecurityDoc,
+  unauthorizedDoc,
   forbiddenDoc,
   internalServerErrorDoc,
-  unauthorizedDoc,
-} from '../../apiDocs/shared'
-import {
-  userBadReqDoc,
-  userIdParamDoc,
-  userResponseWithRoleDoc,
-} from './common'
+  bearerSecurityDoc,
+} from '../../api-docs/shared'
+import { userResponseWithRoleDoc } from './common'
 
-export const getUserDoc = {
+export const getUsersDoc = {
   tags: [USERS_TAG],
-  description: 'Retrieve one user',
-  operationId: 'getUser',
+  description: 'Retrieve all the users',
+  operationId: 'getUsers',
   security: bearerSecurityDoc,
-  parameters: [userIdParamDoc],
   responses: {
     '200': {
       description: 'OK',
       content: {
         'application/json': {
           schema: {
-            type: 'object',
-            properties: userResponseWithRoleDoc,
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: userResponseWithRoleDoc,
+            },
           },
         },
       },
     },
-    '400': userBadReqDoc,
     '401': unauthorizedDoc,
     '403': forbiddenDoc,
     '500': internalServerErrorDoc,

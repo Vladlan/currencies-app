@@ -1,4 +1,4 @@
-import { preparePostgres } from '../../test-utils/preparePostgres'
+import { preparePostgres } from '../../test-utils/prepare-postgres'
 import { IUser } from '../../types'
 import { userService } from '../user.service'
 import { testUserData, testUsersData } from './user.service.mocks'
