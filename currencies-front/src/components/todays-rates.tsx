@@ -6,8 +6,9 @@ import GBP_flag from '../assets/flags/GBP_flag.svg'
 import CAD_flag from '../assets/flags/CAD_flag.svg'
 import MXN_flag from '../assets/flags/MXN_flag.svg'
 import JPY_flag from '../assets/flags/JPY_flag.png'
+import { roundNum } from '../utils'
 
-const flagsMap = {
+export const flagsMap = {
   USD: USD_flag,
   EUR: EUR_flag,
   GBP: GBP_flag,
@@ -17,9 +18,6 @@ const flagsMap = {
 }
 
 type TodaysRatesType = Array<{ key: string; value: number }>
-
-const roundNum = (num: number, limit = 1_0000) =>
-  Math.round((num + Number.EPSILON) * limit) / limit
 
 const TodaysRates = () => {
   const [todaysRates, setTodaysRates] = useState<TodaysRatesType>([])
@@ -50,30 +48,32 @@ const TodaysRates = () => {
 
   return (
     <div className="mx-4 w-100 flex flex-col">
-      <div className="bg-gray-900 p-4 flex flex-shrink-0">
+      <div className="bg-gray-700 p-4 flex flex-shrink-0">
         <span className="text-gray-300 font-semibold text-sm">
           {`Today's rates`}
         </span>
       </div>
 
-      <table className="bg-gray-100 dark:bg-gray-700">
-        <tbody>
-          {todaysRates?.map(({ key, value }) => (
-            <tr key={key} className="dark:text-white text-gray-800 text-sm">
-              <td className="px-4 py-2">
-                <img
-                  src={flagsMap[key as keyof typeof flagsMap]}
-                  alt={`Flag of ${key}`}
-                  width="24"
-                  height="24"
-                />
-              </td>
-              <td>{key}</td>
-              <td>{value}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="w-full py-2 bg-gray-100 dark:bg-gray-900">
+        <table className="w-full ">
+          <tbody>
+            {todaysRates?.map(({ key, value }) => (
+              <tr key={key} className="dark:text-white text-gray-800 text-sm">
+                <td className="pl-4 py-2">
+                  <img
+                    src={flagsMap[key as keyof typeof flagsMap]}
+                    alt={`Flag of ${key}`}
+                    width="24"
+                    height="24"
+                  />
+                </td>
+                <td>{key}</td>
+                <td>{value}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

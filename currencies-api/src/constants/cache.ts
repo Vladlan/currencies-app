@@ -1,1 +1,1 @@
-export const CACHE_TIME = 60_000
+export const CACHE_TIME = 600_000

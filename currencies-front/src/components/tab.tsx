@@ -6,8 +6,8 @@ const Tab = ({ to, label }: { to: string; label: string }) => (
     to={to}
     className={({ isActive }) =>
       isActive
-        ? 'p-4 block bg-gray-800 text-gray-300 hover:text-white font-semibold text-sm'
-        : 'p-4 block hover:bg-gray-800 text-gray-300 hover:text-white font-semibold text-sm'
+        ? 'p-4 block bg-gray-900  text-gray-300 hover:text-white font-semibold text-sm'
+        : 'p-4 block hover:bg-gray-900 text-gray-300 hover:text-white font-semibold text-sm'
     }
   >
     {label}
