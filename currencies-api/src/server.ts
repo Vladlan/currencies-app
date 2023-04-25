@@ -54,7 +54,7 @@ if (process.env.NODE_ENV !== 'test' && !process.env.CURRENCY_API_KEY) {
     }),
   )
 
-  app.use(authGuard)
+  // app.use(authGuard)
   routers.forEach((router) => app.use(router))
 
   app.use(errorLoggerMiddleware)
