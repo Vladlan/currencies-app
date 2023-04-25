@@ -16,7 +16,7 @@ const currenciesProxyMiddleware = createProxyMiddleware(
 )
 
 getCurrenciesRouter.get(
-  CURRENCIES_ROUTES.latestRates,
+  CURRENCIES_ROUTES.currencies,
   getCacheMiddleware(cache),
   currenciesProxyMiddleware,
 )

@@ -19,13 +19,18 @@ export const getLatestRatesDoc = {
           schema: {
             type: 'object',
             properties: {
-              USD: {
-                type: 'number',
-                example: 1.2,
-              },
-              EUR: {
-                type: 'number',
-                example: 1.3,
+              data: {
+                type: 'object',
+                properties: {
+                  USD: {
+                    type: 'number',
+                    example: 1.2,
+                  },
+                  EUR: {
+                    type: 'number',
+                    example: 1.3,
+                  },
+                },
               },
             },
           },

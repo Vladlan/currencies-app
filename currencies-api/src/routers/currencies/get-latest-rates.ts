@@ -5,8 +5,6 @@ import { CURRENCIES_ROUTES } from '../../constants/routes'
 import { getProxyMiddlewareOptions } from './currencies-cache'
 import { getCacheMiddleware } from '../../middleware'
 
-export const getCurrenciesRouter = Router()
-
 export const getLatestRatesRouter = Router()
 
 const LatestRatesProxyMiddleware = createProxyMiddleware(

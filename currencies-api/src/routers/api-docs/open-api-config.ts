@@ -5,7 +5,7 @@ import {
   USER_ROUTES,
 } from '../../constants'
 import { loginDoc } from '../auth/docs'
-import { getLatestRatesDoc } from '../currencies/docs'
+import { getCurrenciesDoc, getLatestRatesDoc } from '../currencies/docs'
 
 import { getUserDoc, getUsersDoc } from '../user/docs'
 
@@ -31,6 +31,9 @@ export const openApiConfig = {
     },
     [CURRENCIES_ROUTES.latestRates]: {
       get: getLatestRatesDoc,
+    },
+    [CURRENCIES_ROUTES.currencies]: {
+      get: getCurrenciesDoc,
     },
 
     [USER_ROUTES.users]: {
