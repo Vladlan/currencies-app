@@ -3,17 +3,7 @@ import { CurrencySelect } from './currency-select'
 import { getRate } from '../services/currencies.service'
 import { useCurrencies } from '../contexts/currencies'
 import { formatDate, httpErrorHandler } from '../utils'
-import { CurrencyInfoType } from '../types/currency-info.type'
-
-const USD_CURRENCY_INFO: CurrencyInfoType = {
-  symbol: '$',
-  name: 'US Dollar',
-  symbol_native: '$',
-  decimal_digits: 2,
-  rounding: 0,
-  code: 'USD',
-  name_plural: 'US dollars',
-}
+import { CurrencyInfoType } from '../types'
 
 const CurrencyConverter: React.FC = () => {
   const [rate, setRate] = useState(1)
@@ -22,14 +12,13 @@ const CurrencyConverter: React.FC = () => {
   const [rateLastUpdateDate, setRateLastUpdatedDate] = useState(
     formatDate(new Date()),
   )
-  const { currenciesInfo } = useCurrencies()
-
-  const [cOptionFrom, setCOptionFrom] = useState<CurrencyInfoType>(
-    currenciesInfo[0] || USD_CURRENCY_INFO,
-  )
-  const [cOptionTo, setCOptionTo] = useState<CurrencyInfoType>(
-    currenciesInfo[0] || USD_CURRENCY_INFO,
-  )
+  const {
+    currenciesInfo,
+    cOptionTo,
+    cOptionFrom,
+    handleCOptionFromChange,
+    handleCOptionToChange,
+  } = useCurrencies()
 
   const handleNumInpChange1 = (e: ChangeEvent<HTMLInputElement>) => {
     const inpValue = e.target.value.trim()
@@ -46,7 +35,7 @@ const CurrencyConverter: React.FC = () => {
   }
 
   const handleFromSelectChange = (e: CurrencyInfoType) => {
-    setCOptionFrom(e)
+    handleCOptionFromChange(e)
 
     getRate(e.code, cOptionTo.code)
       .then((rateRaw) => {
@@ -59,7 +48,7 @@ const CurrencyConverter: React.FC = () => {
   }
 
   const handleToSelectChange = (e: CurrencyInfoType) => {
-    setCOptionTo(e)
+    handleCOptionToChange(e)
 
     getRate(cOptionFrom.code, e.code)
       .then((rateRaw) => {

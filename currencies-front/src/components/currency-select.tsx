@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, FC, useState } from 'react'
 import { flagsMap } from './todays-rates'
 import { CurrencyInfoType } from '../types/currency-info.type'
 
@@ -11,7 +11,7 @@ export interface CurrencySelectProps {
   handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const CurrencySelect: React.FC<CurrencySelectProps> = ({
+export const CurrencySelect: FC<CurrencySelectProps> = ({
   label,
   currencies = [],
   inputValue = 1000,

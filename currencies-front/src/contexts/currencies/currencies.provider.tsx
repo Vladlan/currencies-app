@@ -11,17 +11,24 @@ import {
   getLatestRates,
 } from '../../services/currencies.service'
 import { httpErrorHandler, roundNum } from '../../utils'
+import { USD_CURRENCY_INFO } from '../../constants'
 
 export const CurrenciesCtxProvider = ({ children }: CtxProps) => {
   const [currenciesInfo, setCurrenciesInfo] = useState<CurrencyInfoType[]>([])
   const [todaysRates, setTodaysRates] = useState<TodaysRatesType>([])
+  const [cOptionFrom, setCOptionFrom] =
+    useState<CurrencyInfoType>(USD_CURRENCY_INFO)
+  const [cOptionTo, setCOptionTo] =
+    useState<CurrencyInfoType>(USD_CURRENCY_INFO)
 
   useEffect(() => {
     getCurrenciesInfo()
       .then((currenciesInfoRaw: CurrenciesInfoType) => {
-        if (currenciesInfoRaw) {
-          setCurrenciesInfo(Object.values(currenciesInfoRaw))
-        }
+        if (!currenciesInfoRaw) return
+        const csInfo = Object.values(currenciesInfoRaw)
+        setCurrenciesInfo(csInfo)
+        setCOptionFrom(csInfo[0])
+        setCOptionTo(csInfo[0])
       })
       .catch(httpErrorHandler)
   }, [])
@@ -29,22 +36,38 @@ export const CurrenciesCtxProvider = ({ children }: CtxProps) => {
   useEffect(() => {
     getLatestRates()
       .then((latestRatesRaw: { [key: string]: number }) => {
-        if (latestRatesRaw) {
-          const latestRates = Object.entries(latestRatesRaw).reduce(
-            (acc: TodaysRatesType, [key, value]) => {
-              acc.push({ key, value: roundNum(value) })
-              return acc
-            },
-            [],
-          )
-          setTodaysRates(latestRates)
-        }
+        if (!latestRatesRaw) return
+        const latestRates = Object.entries(latestRatesRaw).reduce(
+          (acc: TodaysRatesType, [key, value]) => {
+            acc.push({ key, value: roundNum(value) })
+            return acc
+          },
+          [],
+        )
+        setTodaysRates(latestRates)
       })
       .catch(httpErrorHandler)
   }, [])
 
+  const handleCOptionFromChange = (e: CurrencyInfoType) => {
+    setCOptionFrom(e)
+  }
+
+  const handleCOptionToChange = (e: CurrencyInfoType) => {
+    setCOptionTo(e)
+  }
+
   return (
-    <CurrenciesContext.Provider value={{ currenciesInfo, todaysRates }}>
+    <CurrenciesContext.Provider
+      value={{
+        handleCOptionFromChange,
+        handleCOptionToChange,
+        currenciesInfo,
+        todaysRates,
+        cOptionFrom,
+        cOptionTo,
+      }}
+    >
       {children}
     </CurrenciesContext.Provider>
   )

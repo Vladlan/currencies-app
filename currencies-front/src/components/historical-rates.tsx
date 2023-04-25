@@ -2,6 +2,7 @@ import React from 'react'
 import AreaChart from './area-chart'
 import { getCurrenciesDataByPeriod } from '../utils'
 import { CurrencyRateByDateType } from '../types'
+import ButtonGroup from './button-group'
 
 const mockData = {
   '2022-04-01': { EUR: 0.90512 },
@@ -372,60 +373,16 @@ const mockData = {
   '2023-04-01': { EUR: 0.919901 },
 }
 
-const baseBtnCss = (custom = '') =>
-  `${custom} px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700`
-const baseBtnCssSelected = (custom = '') =>
-  `${custom} px-4 py-2 text-sm font-medium text-gray-900 border border-gray-900 bg-gray-700 text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700`
-
 const HistoricalRates = () => {
-  const [selected, setSelected] = React.useState('lm')
   const [currenciesData, setCurrenciesData] =
     React.useState<CurrencyRateByDateType>(mockData)
   const setDataByPeriod = (period: string) => {
-    setSelected(period)
     setCurrenciesData(getCurrenciesDataByPeriod(period, mockData))
   }
 
   return (
     <div className="p-4 bg-gray-100 dark:bg-gray-900">
-      <div className="inline-flex rounded-md shadow-sm mt-4" role="group">
-        <button
-          type="button"
-          className={
-            selected === 'lm'
-              ? baseBtnCssSelected('rounded-l-lg')
-              : baseBtnCss('rounded-l-lg')
-          }
-          onClick={() => setDataByPeriod('lm')}
-        >
-          Last Month
-        </button>
-        <button
-          type="button"
-          className={selected === 'l3m' ? baseBtnCssSelected() : baseBtnCss()}
-          onClick={() => setDataByPeriod('l3m')}
-        >
-          Last 3 Month
-        </button>
-        <button
-          type="button"
-          className={selected === 'l6m' ? baseBtnCssSelected() : baseBtnCss()}
-          onClick={() => setDataByPeriod('l6m')}
-        >
-          Last 6 Month
-        </button>
-        <button
-          type="button"
-          className={
-            selected === 'l12m'
-              ? baseBtnCssSelected('rounded-r-lg')
-              : baseBtnCss('rounded-r-lg')
-          }
-          onClick={() => setDataByPeriod('l12m')}
-        >
-          Last Year
-        </button>
-      </div>
+      <ButtonGroup selectClbk={setDataByPeriod} />
       <AreaChart data={currenciesData} />
     </div>
   )
