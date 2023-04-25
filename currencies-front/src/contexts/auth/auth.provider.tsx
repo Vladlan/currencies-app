@@ -3,7 +3,11 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { AuthContext } from './auth.context'
 import { CtxProps } from '../../types'
 import { login, getCurrentUserToken, logout } from '../../services/auth.service'
-import { CURRENCIES_ROUTE, LOGIN_ROUTE } from '../../constants'
+import {
+  CURRENCIES_ROUTE,
+  CURRENCY_CONVERTER_ROUTE,
+  LOGIN_ROUTE,
+} from '../../constants'
 
 export const AuthCtxProvider = ({ children }: CtxProps) => {
   const navigate = useNavigate()
@@ -15,7 +19,9 @@ export const AuthCtxProvider = ({ children }: CtxProps) => {
   const handleLogin = async (userName: string, password: string) => {
     const newToken = await login(userName, password)
     setToken(newToken)
-    const origin = location.state?.from?.pathname || `/${CURRENCIES_ROUTE}`
+    const origin =
+      location.state?.from?.pathname ||
+      `/${CURRENCIES_ROUTE}/${CURRENCY_CONVERTER_ROUTE}`
     navigate(origin)
   }
 

@@ -21,13 +21,13 @@ const TodaysRates = () => {
 
   return (
     <div className="ml-8 w-100 flex flex-col">
-      <div className="bg-gray-700 p-4 flex flex-shrink-0">
-        <span className="text-gray-300 font-semibold text-sm">
+      <div className="bg-gray-200 dark:bg-gray-700 p-4 flex flex-shrink-0">
+        <span className="text-gray-800 dark:text-white font-semibold text-sm">
           {`Today's rates`}
         </span>
       </div>
 
-      <div className="w-full py-2 bg-gray-100 dark:bg-gray-900">
+      <div className="w-full py-2 bg-gray-100 dark:bg-gray-900 min-h-[12rem]">
         <table className="w-full ">
           <tbody>
             {todaysRates?.map(({ key, value }) => (
@@ -38,6 +38,7 @@ const TodaysRates = () => {
                     alt={`Flag of ${key}`}
                     width="24"
                     height="24"
+                    className="h-4"
                   />
                 </td>
                 <td>{key}</td>

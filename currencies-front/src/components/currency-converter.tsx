@@ -72,7 +72,7 @@ const CurrencyConverter: React.FC = () => {
   }
 
   return (
-    <div className="bg-gray-100 dark:bg-gray-900 text-white dark:text-gray-800 pb-8 px-4 shadow-md">
+    <div className="bg-gray-100 dark:bg-gray-900 text-white dark:text-gray-800 pb-8 px-4 shadow-md min-h-[14.75rem]">
       <div className="flex flex-col">
         <div className="mt-4">
           <CurrencySelect

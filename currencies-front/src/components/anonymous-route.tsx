@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 import { CtxProps } from '../types'
 import { getCurrentUserToken } from '../services/auth.service'
-import { CURRENCIES_ROUTE } from '../constants'
+import { CURRENCIES_ROUTE, CURRENCY_CONVERTER_ROUTE } from '../constants'
 
 export const AnonymousRoute = ({
   children,
@@ -13,7 +13,7 @@ export const AnonymousRoute = ({
   if (userToken) {
     return (
       <Navigate
-        to={`/${CURRENCIES_ROUTE}`}
+        to={`/${CURRENCIES_ROUTE}/${CURRENCY_CONVERTER_ROUTE}`}
         replace
         state={{ from: location }}
       />

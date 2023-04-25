@@ -1,6 +1,5 @@
 import React from 'react'
-import { CurrencyInfoType } from '../../components/currency-converter'
-import { TodaysRatesType } from '../../components/todays-rates'
+import { CurrencyInfoType, TodaysRatesType } from '../../types'
 
 type CurrenciesContext = {
   currenciesInfo: CurrencyInfoType[]
