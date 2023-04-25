@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Plot from 'react-plotly.js'
-import { THEME_CHANGE_EVENT, isDarkMode, themeChangeEventBus } from '../utils'
+import { THEME_CHANGE_EVENT, isDarkMode, ThemeChangeEventBus } from '../utils'
+import { DARK_THEME } from '../constants'
 
 const mockData = {
   '2023-01-01': { EUR: 0.934186 },
@@ -126,16 +127,16 @@ const AreaChart = (props) => {
   useEffect(() => {
     const changePlotThemeOnThemeChange = (e: CustomEvent | Event) => {
       const event = e as CustomEvent
-      if (event.detail === 'dark') {
+      if (event.detail === DARK_THEME) {
         setLayout({ ...layout, ...layoutDarkProps })
       } else {
         setLayout({ ...layout, ...layoutLightProps })
       }
     }
-    themeChangeEventBus.on(THEME_CHANGE_EVENT, changePlotThemeOnThemeChange)
+    ThemeChangeEventBus.on(THEME_CHANGE_EVENT, changePlotThemeOnThemeChange)
 
     return () => {
-      themeChangeEventBus.remove(
+      ThemeChangeEventBus.remove(
         THEME_CHANGE_EVENT,
         changePlotThemeOnThemeChange,
       )

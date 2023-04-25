@@ -1,22 +1,24 @@
+import { DARK_THEME, LIGHT_THEME } from '../constants'
+
 export function toggleDarkMode() {
   if (
-    localStorage.theme === 'dark' ||
+    localStorage.theme === DARK_THEME ||
     (!('theme' in localStorage) &&
       window.matchMedia('(prefers-color-scheme: dark)').matches)
   ) {
-    localStorage.setItem('theme', 'light')
-    document.documentElement.classList.remove('dark')
-    themeChangeEventBus.dispatch(THEME_CHANGE_EVENT, 'light')
+    localStorage.setItem('theme', LIGHT_THEME)
+    document.documentElement.classList.remove(DARK_THEME)
+    ThemeChangeEventBus.dispatch(THEME_CHANGE_EVENT, LIGHT_THEME)
   } else {
-    localStorage.setItem('theme', 'dark')
-    document.documentElement.classList.add('dark')
-    themeChangeEventBus.dispatch(THEME_CHANGE_EVENT, 'dark')
+    localStorage.setItem('theme', DARK_THEME)
+    document.documentElement.classList.add(DARK_THEME)
+    ThemeChangeEventBus.dispatch(THEME_CHANGE_EVENT, DARK_THEME)
   }
 }
 
 export const isDarkMode = () => {
   return (
-    localStorage.theme === 'dark' ||
+    localStorage.theme === DARK_THEME ||
     (!('theme' in localStorage) &&
       window.matchMedia('(prefers-color-scheme: dark)').matches)
   )
@@ -24,7 +26,7 @@ export const isDarkMode = () => {
 
 export const THEME_CHANGE_EVENT = 'theme-change'
 
-export const themeChangeEventBus = {
+export const ThemeChangeEventBus = {
   on(eventName: string, callback: (e: Event | CustomEvent) => void) {
     document.addEventListener(eventName, callback)
   },
