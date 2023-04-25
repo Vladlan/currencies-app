@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Plot from 'react-plotly.js'
 import { THEME_CHANGE_EVENT, isDarkMode, ThemeChangeEventBus } from '../utils'
 import { DARK_THEME } from '../constants'
+import { CurrencyRateByDateType } from '../types'
 
 const layoutDarkProps = {
   paper_bgcolor: 'rgb(17,24,39)',
@@ -24,7 +25,12 @@ const getLayoutBase = (title: string) => ({
   autosize: true,
 })
 
-const AreaChart = ({ title = 'USD/ILS', data }) => {
+type AreaChartProps = {
+  title: string
+  data: CurrencyRateByDateType
+}
+
+const AreaChart = ({ title, data }: AreaChartProps) => {
   const [layout, setLayout] = useState({
     ...getLayoutBase(title),
     ...(isDarkMode() ? layoutDarkProps : {}),

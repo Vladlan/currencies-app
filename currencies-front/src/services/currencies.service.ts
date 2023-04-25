@@ -1,5 +1,10 @@
 import axios from 'axios'
-import { API_URL, CURRENCIES_ROUTE, LATEST_RATES_ROUTE } from '../constants'
+import {
+  API_URL,
+  CURRENCIES_ROUTE,
+  HISTORICAL_RATES_ROUTE,
+  LATEST_RATES_ROUTE,
+} from '../constants'
 import { getAuthHeader } from './auth.service'
 import { getDateRangeFromTodayToYearAgo } from '../utils/get-date-range-from-today-to-year-ago'
 
@@ -29,7 +34,7 @@ export const getCurrencyRatesLYHistory = async (
 ) => {
   const [from, to] = getDateRangeFromTodayToYearAgo()
   const response = await axios.get(
-    `${API_URL}/${CURRENCIES_ROUTE}/${LATEST_RATES_ROUTE}?base_currency=${baseCurrency}&currencies=${targetCurrency}&date_from=${from}&date_to=${to}`,
+    `${API_URL}/${CURRENCIES_ROUTE}/${HISTORICAL_RATES_ROUTE}?base_currency=${baseCurrency}&currencies=${targetCurrency}&date_from=${from}&date_to=${to}`,
     {
       headers: getAuthHeader(),
     },

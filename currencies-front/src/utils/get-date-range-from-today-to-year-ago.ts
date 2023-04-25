@@ -1,4 +1,13 @@
+function getDateTwoDaysAgo() {
+  const today = new Date()
+  const twoDaysAgo = new Date(today)
+  twoDaysAgo.setDate(today.getDate() - 2)
+  return twoDaysAgo
+}
+
 export function getDateRangeFromTodayToYearAgo() {
+  const twoDaysAgo = getDateTwoDaysAgo() // api limitations
+
   const today = new Date()
   const yearAgo = new Date(
     today.getFullYear() - 1,
@@ -13,5 +22,5 @@ export function getDateRangeFromTodayToYearAgo() {
     return `${year}-${month}-${day}`
   }
 
-  return [formatDate(yearAgo), formatDate(today)]
+  return [formatDate(yearAgo), formatDate(twoDaysAgo)]
 }
