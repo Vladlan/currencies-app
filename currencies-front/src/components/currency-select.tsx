@@ -46,7 +46,9 @@ export const CurrencySelect: React.FC<CurrencySelectProps> = ({
               height="24"
               className="mr-2 h-4"
             />{' '}
-            {currencyOption.name}
+            <span className="whitespace-nowrap">
+              {currencyOption.name} ({currencyOption.code})
+            </span>
           </button>
           <div
             id="dropdown-states"
