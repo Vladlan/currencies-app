@@ -1,50 +1,111 @@
 import React, { ChangeEvent, useState } from 'react'
-import { CurrencyOption, CurrencySelect } from './currency-select'
+import { CurrencySelect } from './currency-select'
+import { getRate } from '../services/currencies.service'
+import { useCurrencies } from '../contexts/currencies'
+import { formatDate, httpErrorHandler } from '../utils'
+import { CurrencyInfoType } from '../types/currency-info.type'
 
-const availableCurrencies: CurrencyOption[] = [
-  { code: 'USD', name: 'US Dollar' },
-  { code: 'EUR', name: 'Euro' },
-  { code: 'JPY', name: 'Japanese Yen' },
-  { code: 'GBP', name: 'British Pound' },
-]
+const USD_CURRENCY_INFO: CurrencyInfoType = {
+  symbol: '$',
+  name: 'US Dollar',
+  symbol_native: '$',
+  decimal_digits: 2,
+  rounding: 0,
+  code: 'USD',
+  name_plural: 'US dollars',
+}
 
 const CurrencyConverter: React.FC = () => {
   const [rate, setRate] = useState(1)
-  const [value1, setValue1] = useState(1_000)
-  const [value2, setValue2] = useState(1_000 * rate)
+  const [valueFrom, setValueFrom] = useState(1_000)
+  const [valueTo, setValueTo] = useState(1_000 * rate)
+  const [rateLastUpdateDate, setRateLastUpdatedDate] = useState(
+    formatDate(new Date()),
+  )
+  const { currenciesInfo } = useCurrencies()
+
+  const [cOptionFrom, setCOptionFrom] = useState<CurrencyInfoType>(
+    currenciesInfo[0] || USD_CURRENCY_INFO,
+  )
+  const [cOptionTo, setCOptionTo] = useState<CurrencyInfoType>(
+    currenciesInfo[0] || USD_CURRENCY_INFO,
+  )
 
   const handleNumInpChange1 = (e: ChangeEvent<HTMLInputElement>) => {
     const inpValue = e.target.value.trim()
     const input2Value = inpValue ? Number.parseFloat(inpValue) / 1.5 : 0
-    setValue1(inpValue ? Number.parseFloat(inpValue) : 0)
-    setValue2(input2Value)
+    setValueFrom(inpValue ? Number.parseFloat(inpValue) : 0)
+    setValueTo(input2Value)
   }
 
   const handleNumInpChange2 = (e: ChangeEvent<HTMLInputElement>) => {
     const inpValue = e.target.value.trim()
     const input1Value = inpValue ? Number.parseFloat(inpValue) * 1.5 : 0
-    setValue2(inpValue ? Number.parseFloat(inpValue) : 0)
-    setValue1(input1Value)
+    setValueTo(inpValue ? Number.parseFloat(inpValue) : 0)
+    setValueFrom(input1Value)
+  }
+
+  const handleFromSelectChange = (e: CurrencyInfoType) => {
+    setCOptionFrom(e)
+
+    getRate(e.code, cOptionTo.code)
+      .then((rateRaw) => {
+        const [newRate] = Object.values(rateRaw) as number[]
+        setRate(newRate)
+        setValueTo(valueFrom * newRate)
+        setRateLastUpdatedDate(formatDate(new Date()))
+      })
+      .catch(httpErrorHandler)
+  }
+
+  const handleToSelectChange = (e: CurrencyInfoType) => {
+    setCOptionTo(e)
+
+    getRate(cOptionFrom.code, e.code)
+      .then((rateRaw) => {
+        const [newRate] = Object.values(rateRaw) as number[]
+        setRate(newRate)
+        setValueTo(valueFrom * newRate)
+        setRateLastUpdatedDate(formatDate(new Date()))
+      })
+      .catch(httpErrorHandler)
   }
 
   return (
-    <div className="bg-gray-100 dark:bg-gray-900 text-white dark:text-gray-800 pb-8 px-4 rounded-b-lg shadow-md">
+    <div className="bg-gray-100 dark:bg-gray-900 text-white dark:text-gray-800 pb-8 px-4 shadow-md">
       <div className="flex flex-col">
         <div className="mt-4">
           <CurrencySelect
             handleInputChange={handleNumInpChange1}
+            onCurrencySelectChange={handleFromSelectChange}
             label={'From'}
-            currencies={availableCurrencies}
-            inputValue={value1}
+            currencies={currenciesInfo}
+            currencyOption={cOptionFrom}
+            inputValue={valueFrom}
           />
         </div>
         <div className="mt-4">
           <CurrencySelect
+            onCurrencySelectChange={handleToSelectChange}
             handleInputChange={handleNumInpChange2}
             label={'To'}
-            currencies={availableCurrencies}
-            inputValue={value2}
+            currencies={currenciesInfo}
+            inputValue={valueTo}
+            currencyOption={cOptionTo}
           />
+        </div>
+        <div className="mt-4 flex flex-col items-start text-gray-800 dark:text-white">
+          <div>
+            <h4 className="text-xs">Your rate:</h4>
+          </div>
+          <div>
+            <span>
+              {cOptionFrom.code} 1 = {cOptionTo.code} {rate}
+            </span>
+          </div>
+          <div>
+            <p className="text-xs">Last updated: {rateLastUpdateDate}</p>
+          </div>
         </div>
       </div>
     </div>

@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { getLatestRates } from '../services/currencies.service'
+import React from 'react'
 import USD_flag from '../assets/flags/USD_flag.svg'
 import EUR_flag from '../assets/flags/EUR_flag.svg'
 import GBP_flag from '../assets/flags/GBP_flag.svg'
 import CAD_flag from '../assets/flags/CAD_flag.svg'
 import MXN_flag from '../assets/flags/MXN_flag.svg'
 import JPY_flag from '../assets/flags/JPY_flag.png'
-import { roundNum } from '../utils'
+import { useCurrencies } from '../contexts/currencies'
 
 export const flagsMap = {
   USD: USD_flag,
@@ -17,37 +16,11 @@ export const flagsMap = {
   JPY: JPY_flag,
 }
 
-type TodaysRatesType = Array<{ key: string; value: number }>
-
 const TodaysRates = () => {
-  const [todaysRates, setTodaysRates] = useState<TodaysRatesType>([])
-
-  useEffect(() => {
-    getLatestRates().then(
-      (latestRatesRaw: { [key: string]: number }) => {
-        if (latestRatesRaw) {
-          const latestRates = Object.entries(latestRatesRaw).reduce(
-            (acc: TodaysRatesType, [key, value]) => {
-              acc.push({ key, value: roundNum(value) })
-              return acc
-            },
-            [],
-          )
-          setTodaysRates(latestRates)
-        }
-      },
-      (error) => {
-        const errDescription =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString()
-        console.error(errDescription)
-      },
-    )
-  }, [])
+  const { todaysRates } = useCurrencies()
 
   return (
-    <div className="mx-4 w-100 flex flex-col">
+    <div className="ml-8 w-100 flex flex-col">
       <div className="bg-gray-700 p-4 flex flex-shrink-0">
         <span className="text-gray-300 font-semibold text-sm">
           {`Today's rates`}

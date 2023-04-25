@@ -16,8 +16,8 @@ export const openApiConfig = {
   openapi: '3.0.1',
   info: {
     version: '1.0.0',
-    title: 'Monolith api',
-    description: 'Description of a monolith api',
+    title: 'Currencies api',
+    description: 'Description of a currencies api',
   },
   servers: [
     {
