@@ -10,6 +10,7 @@ export const AUTH_ROUTES = {
 
 export const CURRENCIES_ROUTES = {
   latestRates: '/currencies/latest-rates',
+  currencies: '/currencies',
 }
 
 export const ROUTE_API_DOCS = '/api-docs'

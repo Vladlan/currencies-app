@@ -7,18 +7,16 @@ import { getCacheMiddleware } from '../../middleware'
 
 export const getCurrenciesRouter = Router()
 
-export const getLatestRatesRouter = Router()
-
-const LatestRatesProxyMiddleware = createProxyMiddleware(
+const currenciesProxyMiddleware = createProxyMiddleware(
   getProxyMiddlewareOptions(
-    `${process.env.CURRENCY_API_URL}/latest`,
-    `^${CURRENCIES_ROUTES.latestRates}`,
+    `${process.env.CURRENCY_API_URL}/currencies`,
+    `^${CURRENCIES_ROUTES.currencies}`,
     cache,
   ),
 )
 
-getLatestRatesRouter.get(
+getCurrenciesRouter.get(
   CURRENCIES_ROUTES.latestRates,
   getCacheMiddleware(cache),
-  LatestRatesProxyMiddleware,
+  currenciesProxyMiddleware,
 )

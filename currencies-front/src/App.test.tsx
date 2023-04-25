@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { render } from '@testing-library/react'
-import App from './App'
+import App from './app'
 import { expect, test } from 'vitest'
 
 test('renders learn react link', () => {
