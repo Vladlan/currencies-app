@@ -1,6 +1,9 @@
 const { hashSync } = require('bcrypt')
 const path = require('node:path')
-const envPath = path.resolve(__dirname, `./../../../../.env`)
+const envPath = path.resolve(
+  __dirname,
+  `./../../../../.env.${process.env.NODE_ENV}`,
+)
 const env = require('dotenv').config({
   path: envPath,
 }).parsed
