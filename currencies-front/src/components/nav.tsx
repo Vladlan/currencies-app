@@ -3,6 +3,7 @@ import { MoonIcon } from '../icons/moon.icon'
 import { toggleDarkMode } from '../utils/toggle-dark-mode'
 import { useAuth } from '../contexts/auth'
 import { LogOutIcon } from '../icons/log-out.icon'
+import { APP_TITLE } from '../constants'
 
 const Nav = () => {
   const { onLogout, token } = useAuth()
@@ -10,9 +11,7 @@ const Nav = () => {
   return (
     <nav className="flex items-center justify-between h-16 px-4 bg-gray-100 dark:bg-gray-700">
       <div className="w-10" />
-      <h1 className="dark:text-white text-3xl font-extrabold">
-        {'Currencies App'}
-      </h1>
+      <h1 className="dark:text-white text-3xl font-extrabold">{APP_TITLE}</h1>
       <div className="flex items-center">
         <button
           className="mr-4 flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 p-2 text-black rounded hover:text-yellow-400 dark:text-white hover:bg-gray-500 dark:hover:bg-gray-500 dark:hover:text-yellow-400"
