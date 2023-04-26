@@ -7,7 +7,7 @@ const env = dotenv.config({
   path: path.resolve(__dirname, `.env.${process.env.NODE_ENV}`),
 }).parsed
 
-const config = {
+module.exports = {
   database: env.DB_DATABASE,
   dialect: env.DB_DIALECT,
   username: env.DB_USER,
@@ -16,12 +16,4 @@ const config = {
   host: env.DB_HOST,
   node_env: env.NODE_ENV,
   url: `${env.DB_DIALECT}://${env.DB_USER}:${env.DB_PASSWORD}@${env.DB_HOST}:${env.DB_PORT}/${env.DB_DATABASE}`,
-}
-
-// "development", "test", "production" only for sequelize-cli
-module.exports = {
-  development: config,
-  test: config,
-  production: config,
-  config,
 }

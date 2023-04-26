@@ -4,11 +4,11 @@ export const loginBodyDoc = {
   properties: {
     login: {
       type: 'string',
-      example: 'user1',
+      example: 'LoginUser1',
     },
     password: {
       type: 'string',
-      example: 'user1',
+      example: 'LoginUser1',
     },
   },
 }

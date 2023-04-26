@@ -6,13 +6,15 @@
   "scripts": {
     "tsc": "tsc",
     "recreateDb.test": "cross-env NODE_ENV=test npx ts-node ./utils/recreateDb.ts",
+    "recreateDb.dev": "cross-env NODE_ENV=dev npx ts-node ./utils/recreateDb.ts",
     "start.dev": "cross-env NODE_ENV=dev node -r ts-node/register ./src/server.ts",
     "start.test": "cross-env NODE_ENV=test node -r ts-node/register ./src/server.ts",
     "start.dev.watch": "cross-env NODE_ENV=dev nodemon --config nodemon.dev.json -r dotenv/config sequelize-config.js",
     "start.test.watch": "cross-env NODE_ENV=test npm run recreateDb.test && nodemon --config nodemon.test.json -r dotenv/config sequelize-config.js",
     "build": "tsc --build ./tsconfig.build.json",
     "test": "cross-env NODE_ENV=test jest --runInBand --detectOpenHandles",
-    "seed.test": "cross-env NODE_ENV=test npx sequelize-cli db:seed:all"
+    "seed.test": "cross-env NODE_ENV=dev sequelize-cli db:seed:all",
+    "seed.dev": "cross-env NODE_ENV=dev sequelize-cli db:seed:all"
   },
   "keywords": [],
   "engines": {

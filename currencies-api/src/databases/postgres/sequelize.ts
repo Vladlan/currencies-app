@@ -8,7 +8,7 @@ import {
 } from '../../constants'
 import * as models from './models'
 
-import { config } from '../../../sequelize-config'
+import config from '../../../sequelize-config'
 
 if (!config) {
   throw new Error(NO_ENV_MSG)

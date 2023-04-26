@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv'
 import * as path from 'path'
 import { createSequelizeInstance } from '../src/databases/postgres/sequelize'
 const env = dotenv.config({
-  path: path.resolve(__dirname, `./../.env.test`),
+  path: path.resolve(__dirname, `./../.env.${process.env.NODE_ENV}`),
 }).parsed
 
 const createDb = async (pg: Client) => {

@@ -25,7 +25,9 @@ export type NotificationProps = {
 export default function Notification({
   type = 'error',
   autoClose = false,
-  onDelete = () => {},
+  onDelete = () => {
+    // do nothing
+  },
   children,
 }: NotificationProps) {
   const [isClosing, setIsClosing] = React.useState(false)
