@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { render, fireEvent } from '@testing-library/react'
-import { expect, test } from 'vitest'
+import { render, fireEvent, waitFor } from '@testing-library/react'
+import { expect, test, beforeEach } from 'vitest'
 import { CurrencySelect, CurrencySelectProps } from './currency-select'
 import { CurrencyInfoType } from '../types'
 
@@ -19,60 +19,33 @@ const mockProps: CurrencySelectProps = {
   handleInputChange: jest.fn(),
 }
 
-// test('should render the CurrencySelect component with label', () => {
-//   render(<CurrencySelect label="Select Currency" currencies={[]}} />);
-//   const labelElement = screen.getByLabelText('Select Currency');
-//   expect(labelElement).toBeInTheDocument();
-// });
-
-// test('should render the CurrencySelect component with a dropdown button', () => {
-//   render(<CurrencySelect label="Select Currency" currencies={[]} />);
-//   const buttonElement = screen.getByRole('button');
-//   expect(buttonElement).toHaveTextContent('Select Currency');
-// });
-
-// test('should render the CurrencySelect component with a dropdown menu', () => {
-//   render(<CurrencySelect label="Select Currency" currencies={[]} />);
-//   const dropdownMenu = screen.getByRole('menu');
-//   expect(dropdownMenu).toBeInTheDocument();
-// });
-
-// test('should render the CurrencySelect component with an input field', () => {
-//   render(<CurrencySelect label="Select Currency" currencies={[]} />);
-//   const inputField = screen.getByPlaceholderText('value');
-//   expect(inputField).toBeInTheDocument();
-// });
+beforeEach(async () => {
+  mockProps.onCurrencySelectChange = jest.fn()
+  mockProps.handleInputChange = jest.fn()
+})
 
 test('renders CurrencySelect component with default props', () => {
   const screen = render(<CurrencySelect {...mockProps} />)
-  // Add assertions for the initial rendering
-  expect(screen.getByLabelText('Select Currency')).toBeInTheDocument()
-  // Add more assertions as needed
+  expect(screen.getByText(mockProps.label)).toBeInTheDocument()
 })
 
-test('handles currency selection', () => {
+test('handles currency selection', async () => {
   const screen = render(<CurrencySelect {...mockProps} />)
-  // Click the button to open the dropdown
-  fireEvent.click(screen.getByText('United States Dollar (USD)'))
-
-  // Click on a currency option in the dropdown
-  fireEvent.click(screen.getByText('Euro (EUR)'))
-
-  // Check if the onCurrencySelectChange function is called with the selected currency
-  expect(mockProps.onCurrencySelectChange).toHaveBeenCalledWith(
-    mockCurrencies[1],
-  )
-  // Add more assertions as needed
+  const dropdownBtn = screen.container.querySelector('#states-button')
+  fireEvent.click(dropdownBtn!)
+  await waitFor(() => {
+    fireEvent.click(screen.getByText('Euro (EUR)'))
+    expect(mockProps.onCurrencySelectChange).toHaveBeenCalledWith(
+      mockCurrencies[1],
+    )
+  })
 })
 
 test('handles input change', () => {
   const screen = render(<CurrencySelect {...mockProps} />)
-  // Type a new value into the input field
   fireEvent.change(screen.getByPlaceholderText('value'), {
     target: { value: '1500' },
   })
 
-  // Check if the handleInputChange function is called with the new value
   expect(mockProps.handleInputChange).toHaveBeenCalledWith(expect.anything())
-  // Add more assertions as needed
 })
