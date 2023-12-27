@@ -41,10 +41,10 @@ devDependencies:
     specifier: ^29.5.11
     version: 29.5.11
   '@types/react':
-    specifier: ^18.0.26
+    specifier: ^18.2.45
     version: 18.2.45
   '@types/react-dom':
-    specifier: ^18.0.10
+    specifier: ^18.2.18
     version: 18.2.18
   '@types/react-plotly.js':
     specifier: ^2.6.0
@@ -65,11 +65,11 @@ devDependencies:
     specifier: ^8.4.20
     version: 8.4.32
   tailwindcss:
-    specifier: ^3.2.4
+    specifier: ^3.4.0
     version: 3.4.0
   typescript:
-    specifier: ^4.9.4
-    version: 4.9.5
+    specifier: ^5.3.3
+    version: 5.3.3
   vite:
     specifier: ^4.4.12
     version: 4.4.12
@@ -77,8 +77,8 @@ devDependencies:
     specifier: ^1.1.0
     version: 1.1.0(jsdom@20.0.3)
   vitest-canvas-mock:
-    specifier: ^0.2.2
-    version: 0.2.2(vitest@1.1.0)
+    specifier: ^0.3.3
+    version: 0.3.3(vitest@1.1.0)
 
 packages:
 
@@ -4537,9 +4537,9 @@ packages:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
     dev: false
 
-  /typescript@4.9.5:
-    resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
-    engines: {node: '>=4.2.0'}
+  /typescript@5.3.3:
+    resolution: {integrity: sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==}
+    engines: {node: '>=14.17'}
     hasBin: true
     dev: true
 
@@ -4676,8 +4676,8 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vitest-canvas-mock@0.2.2(vitest@1.1.0):
-    resolution: {integrity: sha512-xWieqkTMWa7hXbmHcUP9HOnn4qM8/0pK043BD5bD3ipCpr2tNuEn300necwB3Eh2WZp8QV2k1RelXx50fJDT6g==}
+  /vitest-canvas-mock@0.3.3(vitest@1.1.0):
+    resolution: {integrity: sha512-3P968tYBpqYyzzOaVtqnmYjqbe13576/fkjbDEJSfQAkHtC5/UjuRHOhFEN/ZV5HVZIkaROBUWgazDKJ+Ibw+Q==}
     peerDependencies:
       vitest: '*'
     dependencies:
