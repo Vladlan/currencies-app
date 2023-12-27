@@ -54,7 +54,7 @@ export const CurrencySelect: FC<CurrencySelectProps> = ({
             id="dropdown-states"
             className={
               isOpen
-                ? `z-10 visible absolute bg-white divide-y divide-gray-100 rounded-lg shadow min-w-min w-fit min-w-52 dark:bg-gray-700`
+                ? `z-10 visible absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-fit min-w-52 dark:bg-gray-700`
                 : `hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-fit min-w-52 dark:bg-gray-700`
             }
           >

@@ -1,3 +1,3 @@
-import '@testing-library/jest-dom/extend-expect'
-import 'vitest-canvas-mock'
-window.URL.createObjectURL = function() { return null; };
+  import 'vitest-canvas-mock'
+  import "@testing-library/jest-dom/vitest";
+  window.URL.createObjectURL = function() { return null; };

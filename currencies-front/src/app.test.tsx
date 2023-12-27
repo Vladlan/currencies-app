@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { render } from '@testing-library/react'
-import App from './app'
 import { expect, test } from 'vitest'
-import { APP_TITLE } from './constants'
 import { BrowserRouter } from 'react-router-dom'
+import App from './app'
+import { APP_TITLE } from './constants'
 
 test('renders learn react link', () => {
   const { getByText } = render(
