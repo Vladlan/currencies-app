@@ -11,7 +11,6 @@ class UserService {
       defaults: {
         login: newUser.login,
         password: newUser.password,
-        age: newUser.age,
       },
     })
     if (created) return user
